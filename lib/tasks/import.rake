@@ -39,3 +39,11 @@ task :word_import => :environment do
  	WordForm.create(plaintext: w["plaintext"], phonetictext: w["phonetictext"], stemtext: w["stemtext"], occurences: w["occurences"])
   end
 end
+
+desc "Imports a json file into shakespeare chapters"
+task :chapter_import => :environment do
+  chapters = JSON.parse(File.read('lib/assets/chapter.json'))
+  chapters.each do |c|
+  	Work.find_by_workid(c["workid"]).chapters.create(section: c["section"], chapter: c["chapter_num"], description: c["description"])
+  end
+end
