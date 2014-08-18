@@ -30,5 +30,12 @@ task :import_para => :environment do
  		# Work.find_by_workid(rel["workid"]).characters << Character.find_by_charid(rel["charid"])
  		Character.find_by_charid(para["charid"]).paragraphs.create(paragraph_num: para["paragraphnum"], plaintext: para["plaintext"], phonetictext: para["phonetictext"], stemtext: para["stemtext"], paragraph_type: para["paragraphtype"], section: para["section"], chapter: para["chapter"], char_count: para["charcount"], word_count: para["wordcount"])
  	end
+end
 
+desc "Imports a json file into shakespeare words"
+task :word_import => :environment do
+  words = JSON.parse(File.read('lib/assets/wordform.json'))
+  words.each do |w|
+ 	WordForm.create(plaintext: w["plaintext"], phonetictext: w["phonetictext"], stemtext: w["stemtext"], occurences: w["occurences"])
+  end
 end
