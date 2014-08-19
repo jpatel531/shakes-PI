@@ -46,3 +46,17 @@ task :chapter_import => :environment do
   	Work.find_by_workid(c["workid"]).chapters.create(section: c["section"], chapter: c["chapter_num"], description: c["description"])
   end
 end
+
+# desc "Assign paragraphs to chapters"
+# task :chap_para => :environment do
+# 	works = Work.all
+# 	works.each do |work|
+# 		work.paragraphs.each do |paragraph|
+# 			work.chapters.each do |chapter|
+# 				if (paragraph.section == chapter.section) && (paragraph.chapter == chapter.chapter)
+# 					chapter.paragraphs << paragraph
+# 				end
+# 			end
+# 		end
+# 	end
+# end
