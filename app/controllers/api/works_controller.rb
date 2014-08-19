@@ -8,7 +8,7 @@ module Api
 
 		def show
 			@work = Work.find_by_workid params[:id]
-			render json: @work.to_json
+			render json: @work.to_json(include: [:characters, :chapters])
 		end
 
 	end
